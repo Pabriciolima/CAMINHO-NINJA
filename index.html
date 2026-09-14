@@ -1,26 +1,3 @@
-<!--
-============================================================
-CAMINHO NINJA — ARQUIVO COMPLETO — VERSÃO 03
-============================================================
-
-CORREÇÕES DESTA VERSÃO
-- 220 títulos individuais do Naruto Clássico em português.
-- 500 títulos individuais do Naruto Shippuden em português.
-- Classificação individual: canônico, semi-filler e filler.
-- Orientações de minutos nos episódios mistos com cortes verificados.
-- Correção da informação incorreta sobre Kakashi Gaiden no Clássico.
-- Preservação do progresso, avaliações, datas e notas do casal.
-
-INSTALAÇÃO
-1. Abra este arquivo TXT.
-2. Copie todo o conteúdo, incluindo do <!DOCTYPE html> até </html>.
-3. Substitua completamente o conteúdo do arquivo HTML anterior.
-4. Salve o arquivo com a extensão .html.
-5. Abra novamente e atualize usando Ctrl + Shift + R.
-
-CÓDIGO COMPLETO
-============================================================
--->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -129,10 +106,12 @@ CÓDIGO COMPLETO
     width:64px; height:64px; border-radius:50%; border:3px solid var(--ink); display:flex; align-items:center; justify-content:center;
     font-size:24px; cursor:pointer; position:relative; flex-shrink:0;
   }
-  .node.type-canon{background:var(--blue); box-shadow:0 4px 0 var(--blue-dk);}
+  .node.type-canon{background:var(--green); box-shadow:0 4px 0 var(--green-dk);}
   .node.type-semi{background:var(--yellow); box-shadow:0 4px 0 var(--yellow-dk);}
   .node.type-filler{background:var(--grey); box-shadow:0 4px 0 var(--grey-dk);}
-  .node.done{background:var(--green); box-shadow:0 4px 0 var(--green-dk);}
+  .node.done.type-canon{background:var(--green); box-shadow:0 4px 0 var(--green-dk);}
+  .node.done.type-semi{background:var(--yellow); box-shadow:0 4px 0 var(--yellow-dk);}
+  .node.done.type-filler{background:var(--grey); box-shadow:0 4px 0 var(--grey-dk);}
   .node-label{
     position:absolute; top:70px; width:140px; text-align:center; font-size:11.5px; font-weight:800; left:50%; transform:translateX(-50%);
     line-height:1.25;
@@ -163,13 +142,15 @@ CÓDIGO COMPLETO
   .ep-row input[type=checkbox]{width:20px; height:20px; accent-color:var(--green); flex-shrink:0;}
   .ep-num{font-weight:800; font-size:12.5px; color:var(--grey-dk); width:34px; flex-shrink:0;}
   .ep-dot{width:9px; height:9px; border-radius:50%; flex-shrink:0;}
-  .dot-canon{background:var(--blue);} .dot-semi{background:var(--yellow-dk);} .dot-filler{background:var(--grey-dk);}
+  .dot-canon{background:var(--green);} .dot-semi{background:var(--yellow);} .dot-filler{background:var(--grey);}
   .ep-title{flex:1; min-width:0; font-size:13.5px; font-weight:700;}
   .ep-cry{font-size:13px;}
   .ep-caret{font-size:12px; color:var(--grey-dk);}
   .ep-detail{display:none; padding:10px 4px 2px 44px;}
   .ep-detail.open{display:block;}
-  .ep-tip-mini{background:#FFF2CE; border:2px solid var(--yellow-dk); border-radius:8px; padding:6px 9px; font-size:11.5px; font-weight:700; color:#6b5300; margin-bottom:8px;}
+  .ep-tip-mini{border-radius:8px; padding:8px 10px; font-size:11.5px; font-weight:700; margin-bottom:8px; line-height:1.45;}
+  .ep-tip-mini.time-guide{background:#F1EBFF; border:2px solid var(--purple); color:var(--purple-dk);}
+  .ep-tip-mini.mixed-warning{background:#FFF2CE; border:2px solid var(--yellow-dk); color:#6b5300;}
   .stars{display:flex; gap:4px; margin-bottom:8px;}
   .stars span{font-size:18px; color:var(--grey); cursor:pointer;}
   .stars span.on{color:var(--yellow-dk);}
@@ -182,7 +163,7 @@ CÓDIGO COMPLETO
   .movie-item .t{font-weight:700; font-size:14px;}
   .movie-item .m{font-size:11.5px; color:var(--grey-dk); margin-top:4px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
   .pill{font-size:10.5px; font-weight:800; padding:3px 8px; border-radius:20px;}
-  .pill-canon{background:#DDEEFF; color:var(--blue-dk);}
+  .pill-canon{background:#E8F8DC; color:var(--green-dk);}
   .pill-semi{background:#FFF2CE; color:var(--yellow-dk);}
   .pill-filler{background:#EFEDF3; color:var(--grey-dk);}
  
@@ -266,7 +247,7 @@ CÓDIGO COMPLETO
     </div>
     <div class="path-progress" id="pathProgress">0 / 0 episódios</div>
     <div class="legend-row">
-      <span>🔵 Canônico</span><span>🟡 Semi-cânone</span><span>⚪ Filler</span><span>✅ Concluído</span>
+      <span>🟢 Canônico</span><span>🟡 Semi-filler</span><span>⚪ Filler</span><span>🟣 Guia de minutos</span><span>✅ Assistido</span>
     </div>
     <div class="path" id="pathNodes"></div>
   </section>
@@ -337,7 +318,7 @@ CÓDIGO COMPLETO
 </nav>
  
 <footer class="note">
-  Títulos individuais em português conferidos na lista de episódios da Wikipédia. Classificação de fillers baseada em guia especializado; tempos podem variar alguns segundos conforme a plataforma. Progresso salvo e compartilhado entre o casal.
+  Títulos individuais em português conferidos na lista de episódios da Wikipédia. Classificação de fillers baseada em guia especializado; tempos podem variar alguns segundos conforme a plataforma. Progresso sincronizado entre o casal.
 </footer>
  
 <script>
@@ -515,7 +496,8 @@ function buildEpisodes(arcs, saga){
     arc.episodes=[];
     for(let n=arc.start;n<=arc.end;n++){
       const type = guide.filler.has(n) ? 'filler' : guide.mixed.has(n) ? 'semi' : 'canon';
-      const minuteTip = MINUTE_GUIDE[saga][n] || (type==='semi'
+      const verifiedMinuteTip = MINUTE_GUIDE[saga][n] || null;
+      const minuteTip = verifiedMinuteTip || (type==='semi'
         ? 'Episódio misto: há conteúdo do mangá e expansão do anime. Sem um corte de tempo verificado, assistam completo para não perder cenas canônicas.'
         : null);
       arc.episodes.push({
@@ -524,6 +506,7 @@ function buildEpisodes(arcs, saga){
         type,
         beat:EPISODE_TITLES[saga][n-1],
         minuteTip,
+        verifiedMinuteTip:!!verifiedMinuteTip,
         cry:(arc.cry||[]).includes(n)
       });
     }
@@ -538,18 +521,46 @@ buildEpisodes(SHIP_ARCS, 'ship');
    STATE
    ========================================================= */
 const STORAGE_KEY = 'naruto-tracker-progress-casal';
+const SUPABASE_URL = 'https://psyirfduleuhzjqevrhm.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_P7NJLWkenDO6xS_IynPNtg_vAitIEOd';
+const SUPABASE_TABLE = 'naruto_casal_progresso';
 let state = { episodes:{}, movies:{} };
 function getEp(id){ if(!state.episodes[id]) state.episodes[id]={watched:false,rating:0,date:'',note:''}; return state.episodes[id]; }
 function getMovie(id){ if(!state.movies[id]) state.movies[id]={watched:false,rating:0,date:'',note:''}; return state.movies[id]; }
  
 let saveTimer=null;
 function scheduleSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(saveState,600); }
-async function saveState(){ try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state), true); }catch(e){ console.error(e); } }
+async function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  try{
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?id=eq.casal`, {
+      method:'PATCH',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
+      },
+      body:JSON.stringify({ estado:state, atualizado_em:new Date().toISOString() })
+    });
+    if(!response.ok) throw new Error(`Supabase HTTP ${response.status}`);
+  }catch(e){ console.warn('Sem conexão: progresso mantido neste navegador.', e); }
+}
 async function loadState(){
   try{
-    const res = await window.storage.get(STORAGE_KEY, true);
-    if(res && res.value){ state = Object.assign({episodes:{},movies:{}}, JSON.parse(res.value)); }
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved){ state = Object.assign({episodes:{},movies:{}}, JSON.parse(saved)); }
   }catch(e){ /* nothing saved yet */ }
+  try{
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?select=estado&id=eq.casal&limit=1`, {
+      headers:{ 'apikey':SUPABASE_KEY }
+    });
+    if(!response.ok) throw new Error(`Supabase HTTP ${response.status}`);
+    const rows = await response.json();
+    if(rows[0] && rows[0].estado){
+      state = Object.assign({episodes:{},movies:{}}, rows[0].estado);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+  }catch(e){ console.warn('Usando o progresso salvo neste navegador.', e); }
   renderAll();
 }
  
@@ -634,7 +645,7 @@ let openArcId=null;
 function openSheet(arc){
   openArcId = arc.id;
   document.getElementById('sheetTitle').textContent = arc.emoji+' '+arc.name;
-  document.getElementById('sheetSub').textContent = `Ep. ${arc.start}–${arc.end} · ${arc.type==='canon'?'🔵 Canônico':arc.type==='semi'?'🟡 Semi-cânone':'⚪ Filler (opcional)'}`;
+  document.getElementById('sheetSub').textContent = `Ep. ${arc.start}–${arc.end} · ${arc.type==='canon'?'🟢 Canônico':arc.type==='semi'?'🟡 Semi-filler':'⚪ Filler (opcional)'}`;
   const tipEl = document.getElementById('sheetTip');
   tipEl.innerHTML = arc.beatMinuteTip ? `<div class="sheet-tip">⏱️ ${arc.beatMinuteTip.tip}</div>` : '';
  
@@ -666,7 +677,7 @@ function renderEpisodeItem(ep, arc){
       <div class="ep-caret">▾</div>
     </div>
     <div class="ep-detail" id="detail-${ep.id}">
-      ${ep.minuteTip ? `<div class="ep-tip-mini">⏱️ ${ep.minuteTip}</div>` : ''}
+      ${ep.minuteTip ? `<div class="ep-tip-mini ${ep.verifiedMinuteTip?'time-guide':'mixed-warning'}">${ep.verifiedMinuteTip?'⏱️':'🟡'} ${ep.minuteTip}</div>` : ''}
       <div class="stars">${[1,2,3,4,5].map(n=>`<span data-star="${n}" class="${st.rating>=n?'on':''}">★</span>`).join('')}</div>
       <input type="date" data-date value="${st.date||''}">
       <textarea placeholder="Nota do casal sobre este episódio...">${st.note||''}</textarea>
@@ -704,7 +715,7 @@ function renderMovies(){
   MOVIES.forEach(m=>{
     const st = getMovie(m.id);
     const pillClass = m.canon===true?'pill-canon':m.canon==='semi'?'pill-semi':'pill-filler';
-    const pillTxt = m.canon===true?'🔵 Canônico':m.canon==='semi'?'🟡 Semi-cânone':'⚪ Não-canônico';
+    const pillTxt = m.canon===true?'🟢 Canônico':m.canon==='semi'?'🟡 Semi-filler':'⚪ Não-canônico';
     const div = document.createElement('div');
     div.className='movie-item';
     div.innerHTML = `
