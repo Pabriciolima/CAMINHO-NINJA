@@ -1,0 +1,839 @@
+<!--
+============================================================
+CAMINHO NINJA — ARQUIVO COMPLETO — VERSÃO 03
+============================================================
+
+CORREÇÕES DESTA VERSÃO
+- 220 títulos individuais do Naruto Clássico em português.
+- 500 títulos individuais do Naruto Shippuden em português.
+- Classificação individual: canônico, semi-filler e filler.
+- Orientações de minutos nos episódios mistos com cortes verificados.
+- Correção da informação incorreta sobre Kakashi Gaiden no Clássico.
+- Preservação do progresso, avaliações, datas e notas do casal.
+
+INSTALAÇÃO
+1. Abra este arquivo TXT.
+2. Copie todo o conteúdo, incluindo do <!DOCTYPE html> até </html>.
+3. Substitua completamente o conteúdo do arquivo HTML anterior.
+4. Salve o arquivo com a extensão .html.
+5. Abra novamente e atualize usando Ctrl + Shift + R.
+
+CÓDIGO COMPLETO
+============================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caminho Ninja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF8EC;
+    --ink:#241F33;
+    --card:#FFFFFF;
+    --purple:#8C6EFF;
+    --purple-dk:#6A4FDB;
+    --pink:#FF5FA2;
+    --pink-dk:#DB3F80;
+    --blue:#1CB0F6;
+    --blue-dk:#0D8FCE;
+    --green:#58CC02;
+    --green-dk:#3F9900;
+    --yellow:#FFC800;
+    --yellow-dk:#E0A800;
+    --grey:#CDCBD4;
+    --grey-dk:#A8A5B3;
+    --line:#EDE7D8;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',sans-serif;padding-bottom:90px;-webkit-tap-highlight-color:transparent;}
+  h1,h2,h3,.display{font-family:'Fredoka',sans-serif;}
+  button{font-family:'Nunito',sans-serif;}
+ 
+  /* ---------- shared button/card "sticker" style ---------- */
+  .chip{border-radius:14px; border:2.5px solid var(--ink); box-shadow:0 4px 0 var(--ink);}
+  .press{cursor:pointer; transition:transform .08s ease, box-shadow .08s ease;}
+  .press:active{transform:translateY(3px); box-shadow:0 1px 0 var(--ink) !important;}
+ 
+  /* ---------- header ---------- */
+  header.top{padding:22px 18px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  header.top .brand{font-size:20px; font-weight:600; display:flex; align-items:center; gap:8px;}
+  header.top .streak{display:flex; align-items:center; gap:6px; background:var(--card); padding:7px 12px; border-radius:20px; border:2.5px solid var(--ink); font-weight:700; font-size:14px;}
+ 
+  main{max-width:520px; margin:0 auto; padding:0 16px;}
+ 
+  /* ---------- bottom nav ---------- */
+  nav.bottom{
+    position:fixed; bottom:0; left:0; right:0; background:var(--card); border-top:2.5px solid var(--ink);
+    display:flex; justify-content:space-around; padding:8px 4px 10px; z-index:50;
+  }
+  nav.bottom button{
+    background:none; border:none; display:flex; flex-direction:column; align-items:center; gap:2px;
+    font-size:10.5px; color:var(--grey-dk); font-weight:700; padding:4px 6px; cursor:pointer;
+  }
+  nav.bottom button .ic{font-size:22px; line-height:1;}
+  nav.bottom button.active{color:var(--ink);}
+  nav.bottom button.active .ic{transform:scale(1.1);}
+ 
+  section.view{display:none;}
+  section.view.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+ 
+  /* ---------- HOME ---------- */
+  .ring-card{background:var(--purple); color:#fff; padding:22px; margin:6px 0 16px; text-align:center;}
+  .ring-card .big{font-family:'Fredoka'; font-size:40px; font-weight:600;}
+  .ring-card .sub{font-size:13.5px; opacity:.9; margin-top:2px;}
+  .ring-track{height:12px; background:rgba(255,255,255,.3); border-radius:8px; margin-top:14px; overflow:hidden;}
+  .ring-fill{height:100%; background:#fff; border-radius:8px;}
+ 
+  .continue-card{background:var(--card); padding:16px; margin-bottom:14px; display:flex; align-items:center; gap:14px;}
+  .continue-card .badge{width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; border:2px solid var(--ink);}
+  .continue-card .txt{flex:1; min-width:0;}
+  .continue-card .txt .lbl{font-size:11.5px; color:var(--grey-dk); font-weight:800; text-transform:uppercase; letter-spacing:.03em;}
+  .continue-card .txt .name{font-weight:700; font-size:14.5px; margin-top:1px;}
+  .continue-card .go{background:var(--green); color:#fff; border:2px solid var(--ink); box-shadow:0 3px 0 var(--green-dk); border-radius:10px; padding:8px 14px; font-weight:800; font-size:13px; flex-shrink:0;}
+ 
+  .home-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;}
+  .season-card{padding:18px 14px; color:#fff; cursor:pointer;}
+  .season-card.classic{background:var(--blue); box-shadow:0 4px 0 var(--blue-dk);}
+  .season-card.ship{background:var(--pink); box-shadow:0 4px 0 var(--pink-dk);}
+  .season-card .emoji{font-size:26px;}
+  .season-card .t{font-family:'Fredoka'; font-weight:600; font-size:16px; margin-top:6px;}
+  .season-card .p{font-size:12px; opacity:.9; margin-top:2px;}
+  .season-card .mini-track{height:7px; background:rgba(255,255,255,.35); border-radius:6px; margin-top:10px; overflow:hidden;}
+  .season-card .mini-fill{height:100%; background:#fff; border-radius:6px;}
+ 
+  .wide-card{padding:16px; margin-bottom:12px; display:flex; align-items:center; gap:12px; cursor:pointer; background:var(--card);}
+  .wide-card .emoji{font-size:24px;}
+  .wide-card .t{font-weight:700; font-size:14.5px;}
+  .wide-card .p{font-size:12px; color:var(--grey-dk); margin-top:1px;}
+  .wide-card .arrow{margin-left:auto; font-size:18px; color:var(--grey-dk);}
+ 
+  /* ---------- PATH VIEW ---------- */
+  .path-header{display:flex; align-items:center; gap:10px; padding:16px 0 6px;}
+  .back-btn{background:var(--card); border:2px solid var(--ink); border-radius:10px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;}
+  .path-header h2{margin:0; font-size:19px;}
+  .path-progress{font-size:12.5px; color:var(--grey-dk); font-weight:700; padding-left:44px; margin-bottom:14px;}
+ 
+  .legend-row{display:flex; gap:8px; flex-wrap:wrap; padding-left:2px; margin-bottom:18px;}
+  .legend-row span{font-size:11px; font-weight:700; background:var(--card); border:2px solid var(--ink); border-radius:20px; padding:4px 10px;}
+ 
+  .path{position:relative; padding:10px 0 30px;}
+  .path .node-row{display:flex; margin-bottom:22px; position:relative;}
+  .path .node-row.left{justify-content:flex-start;}
+  .path .node-row.right{justify-content:flex-end;}
+  .node{
+    width:64px; height:64px; border-radius:50%; border:3px solid var(--ink); display:flex; align-items:center; justify-content:center;
+    font-size:24px; cursor:pointer; position:relative; flex-shrink:0;
+  }
+  .node.type-canon{background:var(--blue); box-shadow:0 4px 0 var(--blue-dk);}
+  .node.type-semi{background:var(--yellow); box-shadow:0 4px 0 var(--yellow-dk);}
+  .node.type-filler{background:var(--grey); box-shadow:0 4px 0 var(--grey-dk);}
+  .node.done{background:var(--green); box-shadow:0 4px 0 var(--green-dk);}
+  .node-label{
+    position:absolute; top:70px; width:140px; text-align:center; font-size:11.5px; font-weight:800; left:50%; transform:translateX(-50%);
+    line-height:1.25;
+  }
+  .node-row.left .node-label{left:32px; transform:none; text-align:left;}
+  .node-row.right .node-label{right:32px; left:auto; transform:none; text-align:right;}
+  .node-check{position:absolute; top:-4px; right:-4px; background:var(--green); border:2px solid var(--ink); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:12px; color:#fff;}
+ 
+  /* ---------- EPISODE SHEET ---------- */
+  .sheet-backdrop{position:fixed; inset:0; background:rgba(36,31,51,.5); z-index:90; display:none;}
+  .sheet-backdrop.open{display:block;}
+  .sheet{
+    position:fixed; left:0; right:0; bottom:0; max-width:520px; margin:0 auto; background:var(--bg);
+    border-radius:22px 22px 0 0; border:2.5px solid var(--ink); border-bottom:none; z-index:91;
+    max-height:86vh; display:flex; flex-direction:column; transform:translateY(100%); transition:transform .28s ease;
+  }
+  .sheet.open{transform:translateY(0);}
+  .sheet-handle{width:40px; height:5px; background:var(--grey); border-radius:4px; margin:10px auto 6px;}
+  .sheet-head{padding:4px 18px 12px; border-bottom:2px solid var(--line);}
+  .sheet-head .t{font-family:'Fredoka'; font-weight:600; font-size:17px;}
+  .sheet-head .p{font-size:12px; color:var(--grey-dk); margin-top:2px;}
+  .sheet-tip{margin:12px 18px 0; padding:10px 12px; background:#FFF2CE; border:2px solid var(--yellow-dk); border-radius:10px; font-size:12px; color:#6b5300; font-weight:700;}
+  .sheet-body{overflow-y:auto; padding:10px 10px 24px;}
+  .close-x{position:absolute; top:12px; right:14px; background:var(--card); border:2px solid var(--ink); border-radius:50%; width:30px; height:30px; font-size:14px; cursor:pointer;}
+ 
+  .ep-item{background:var(--card); border:2px solid var(--ink); border-radius:14px; padding:10px 12px; margin:8px; display:flex; flex-direction:column; gap:2px;}
+  .ep-row{display:flex; align-items:center; gap:10px; cursor:pointer;}
+  .ep-row input[type=checkbox]{width:20px; height:20px; accent-color:var(--green); flex-shrink:0;}
+  .ep-num{font-weight:800; font-size:12.5px; color:var(--grey-dk); width:34px; flex-shrink:0;}
+  .ep-dot{width:9px; height:9px; border-radius:50%; flex-shrink:0;}
+  .dot-canon{background:var(--blue);} .dot-semi{background:var(--yellow-dk);} .dot-filler{background:var(--grey-dk);}
+  .ep-title{flex:1; min-width:0; font-size:13.5px; font-weight:700;}
+  .ep-cry{font-size:13px;}
+  .ep-caret{font-size:12px; color:var(--grey-dk);}
+  .ep-detail{display:none; padding:10px 4px 2px 44px;}
+  .ep-detail.open{display:block;}
+  .ep-tip-mini{background:#FFF2CE; border:2px solid var(--yellow-dk); border-radius:8px; padding:6px 9px; font-size:11.5px; font-weight:700; color:#6b5300; margin-bottom:8px;}
+  .stars{display:flex; gap:4px; margin-bottom:8px;}
+  .stars span{font-size:18px; color:var(--grey); cursor:pointer;}
+  .stars span.on{color:var(--yellow-dk);}
+  .ep-detail input[type=date]{background:var(--bg); border:2px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; margin-bottom:8px; color-scheme:light; width:150px;}
+  .ep-detail textarea{width:100%; min-height:50px; background:var(--bg); border:2px solid var(--line); border-radius:8px; padding:7px 9px; font-size:12.5px; font-family:'Nunito'; resize:vertical;}
+ 
+  /* ---------- MOVIES ---------- */
+  .movie-item{background:var(--card); border:2.5px solid var(--ink); border-radius:16px; padding:14px; margin-bottom:12px; display:flex; gap:12px; align-items:flex-start;}
+  .movie-item input[type=checkbox]{width:20px; height:20px; accent-color:var(--green); margin-top:2px; flex-shrink:0;}
+  .movie-item .t{font-weight:700; font-size:14px;}
+  .movie-item .m{font-size:11.5px; color:var(--grey-dk); margin-top:4px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .pill{font-size:10.5px; font-weight:800; padding:3px 8px; border-radius:20px;}
+  .pill-canon{background:#DDEEFF; color:var(--blue-dk);}
+  .pill-semi{background:#FFF2CE; color:var(--yellow-dk);}
+  .pill-filler{background:#EFEDF3; color:var(--grey-dk);}
+ 
+  /* ---------- EXTRAS ---------- */
+  .extra-card{background:var(--card); border:2.5px solid var(--ink); border-radius:18px; padding:18px; margin-bottom:16px;}
+  .extra-card h3{margin:0 0 10px; font-size:15.5px;}
+  .seg{display:flex; background:var(--bg); border:2px solid var(--ink); border-radius:12px; overflow:hidden; margin-bottom:12px;}
+  .seg button{flex:1; background:none; border:none; padding:9px; font-weight:800; font-size:12.5px; cursor:pointer; color:var(--grey-dk);}
+  .seg button.active{background:var(--purple); color:#fff;}
+  .row-field{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; font-size:13px; font-weight:700;}
+  .row-field input, .row-field select{background:var(--bg); border:2px solid var(--line); border-radius:8px; padding:7px 10px; font-size:13px; width:120px; font-family:'Nunito';}
+  .result-box{background:#F1EBFF; border:2px solid var(--purple); border-radius:12px; padding:14px; margin-top:6px;}
+  .result-box .big{font-family:'Fredoka'; font-size:22px; color:var(--purple-dk);}
+  .result-box .small{font-size:12px; color:var(--ink); margin-top:4px; line-height:1.5;}
+ 
+  .list-mini{background:var(--bg); border:2px solid var(--line); border-radius:10px; padding:9px 12px; margin-bottom:7px; font-size:12.5px; font-weight:700; display:flex; justify-content:space-between; gap:8px;}
+  .list-mini .r{color:var(--grey-dk); font-weight:800; flex-shrink:0;}
+ 
+  footer.note{max-width:520px; margin:16px auto; padding:0 16px; font-size:11px; color:var(--grey-dk); text-align:center; line-height:1.6;}
+</style>
+</head>
+<body>
+ 
+<header class="top">
+  <div class="brand">🍃 Caminho Ninja</div>
+  <div class="streak" id="streakBadge">🔥 <span id="streakNum">0</span> assistidos</div>
+</header>
+ 
+<main>
+ 
+  <!-- HOME -->
+  <section class="view active" id="view-home">
+    <div class="chip ring-card">
+      <div class="big" id="homePct">0%</div>
+      <div class="sub">da jornada ninja completa</div>
+      <div class="ring-track"><div class="ring-fill" id="homeRing" style="width:0%"></div></div>
+    </div>
+ 
+    <div class="chip continue-card" id="continueCard" style="display:none;">
+      <div class="badge" id="continueBadge">▶️</div>
+      <div class="txt">
+        <div class="lbl">Continuar assistindo</div>
+        <div class="name" id="continueName">—</div>
+      </div>
+      <button class="go press" id="continueGo">Ir</button>
+    </div>
+ 
+    <div class="home-grid">
+      <div class="chip season-card classic press" data-open-season="classic">
+        <div class="emoji">🥷</div>
+        <div class="t">Clássico</div>
+        <div class="p" id="classicMini">0 / 220</div>
+        <div class="mini-track"><div class="mini-fill" id="classicMiniBar" style="width:0%"></div></div>
+      </div>
+      <div class="chip season-card ship press" data-open-season="ship">
+        <div class="emoji">🔥</div>
+        <div class="t">Shippuden</div>
+        <div class="p" id="shipMini">0 / 500</div>
+        <div class="mini-track"><div class="mini-fill" id="shipMiniBar" style="width:0%"></div></div>
+      </div>
+    </div>
+ 
+    <div class="chip wide-card press" data-nav="movies">
+      <div class="emoji">⭐</div>
+      <div><div class="t">Filmes &amp; OVAs</div><div class="p" id="movieMini">0 / 14 assistidos</div></div>
+      <div class="arrow">→</div>
+    </div>
+ 
+    <div class="chip wide-card press" data-nav="extras">
+      <div class="emoji">🗓️</div>
+      <div><div class="t">Planejar maratona</div><div class="p">Quanto tempo falta pra terminar?</div></div>
+      <div class="arrow">→</div>
+    </div>
+  </section>
+ 
+  <!-- PATH (classic / shippuden) -->
+  <section class="view" id="view-path">
+    <div class="path-header">
+      <button class="back-btn press" data-nav="home">←</button>
+      <h2 id="pathTitle">Clássico</h2>
+    </div>
+    <div class="path-progress" id="pathProgress">0 / 0 episódios</div>
+    <div class="legend-row">
+      <span>🔵 Canônico</span><span>🟡 Semi-cânone</span><span>⚪ Filler</span><span>✅ Concluído</span>
+    </div>
+    <div class="path" id="pathNodes"></div>
+  </section>
+ 
+  <!-- MOVIES -->
+  <section class="view" id="view-movies">
+    <div class="path-header">
+      <button class="back-btn press" data-nav="home">←</button>
+      <h2>Filmes &amp; OVAs</h2>
+    </div>
+    <div id="moviesList" style="margin-top:14px;"></div>
+  </section>
+ 
+  <!-- EXTRAS -->
+  <section class="view" id="view-extras">
+    <div class="path-header">
+      <button class="back-btn press" data-nav="home">←</button>
+      <h2>Extras</h2>
+    </div>
+ 
+    <div class="extra-card" style="margin-top:14px;">
+      <h3>🗓️ Planeje a maratona</h3>
+      <div class="seg" id="marathonModeSeg">
+        <button data-m="weeks" class="active">Por semanas</button>
+        <button data-m="perday">Por episódios/dia</button>
+      </div>
+      <div class="row-field">
+        <span id="marathonValueLabel">Semanas desejadas</span>
+        <input type="number" id="marathonValue" value="12" min="1">
+      </div>
+      <div class="seg" id="marathonScopeSeg">
+        <button data-s="all" class="active">Tudo (720)</button>
+        <button data-s="essential">Só essenciais</button>
+      </div>
+      <div class="result-box" id="marathonResult"></div>
+    </div>
+ 
+    <div class="extra-card">
+      <h3>✅ Obrigatórios vs. opcionais</h3>
+      <div class="seg" id="essentialSeg">
+        <button data-f="essential" class="active">🔵🟡 Essenciais</button>
+        <button data-f="optional">⚪ Opcionais</button>
+      </div>
+      <div id="essentialList"></div>
+    </div>
+  </section>
+ 
+</main>
+ 
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-handle"></div>
+  <button class="close-x press" id="sheetClose">✕</button>
+  <div class="sheet-head">
+    <div class="t" id="sheetTitle">Arco</div>
+    <div class="p" id="sheetSub">Ep. 1–10</div>
+  </div>
+  <div id="sheetTip"></div>
+  <div class="sheet-body" id="sheetBody"></div>
+</div>
+ 
+<nav class="bottom">
+  <button data-nav="home" class="active"><span class="ic">🏠</span>Início</button>
+  <button data-nav="path-classic"><span class="ic">🥷</span>Clássico</button>
+  <button data-nav="path-ship"><span class="ic">🔥</span>Shippuden</button>
+  <button data-nav="movies"><span class="ic">⭐</span>Filmes</button>
+  <button data-nav="extras"><span class="ic">🗓️</span>Extras</button>
+</nav>
+ 
+<footer class="note">
+  Títulos individuais em português conferidos na lista de episódios da Wikipédia. Classificação de fillers baseada em guia especializado; tempos podem variar alguns segundos conforme a plataforma. Progresso salvo e compartilhado entre o casal.
+</footer>
+ 
+<script>
+(function(){
+ 
+/* =========================================================
+   DATA
+   ========================================================= */
+
+// Títulos brasileiros conforme as listas de episódios da Wikipédia em português.
+const EPISODE_TITLES = {
+  classic: ["Naruto Uzumaki Chegando!","Meu Nome é Konohamaru!","Sasuke e Sakura: Amigos ou Inimigos?","Aprovar ou Reprovar? Um Exercício de Sobrevivência","Você Falhou! A Decisão Final de Kakashi","Uma Missão Perigosa: Uma Aventura no País das Ondas!","O Assassino da Névoa!","O Juramento de Dor","Kakashi: O Guerreiro Sharingan","A Floresta do Chakra","A Terra Onde uma Vez um Herói Viveu","Batalha na Ponte! Zabuza Retorna!","O Jutsu Secreto de Haku: Espelhos de Cristais de Gelo","O Ninja Número Um, Hiperativo e Cabeça Oca Entra na Briga!","Visibilidade Zero! O Sharingan Desvendado","O Selo Rompido","Passado Branco, Ambição Escondida","As Armas Conhecidas como Shinobi","O Demônio na Neve","Um Novo Capítulo Começa: A Prova Chunin","Identifiquem-se: Rivais Novos e Poderosos","Desafio Chunin: Rock Lee Contra Sasuke!","Batalha Genin! Os Nove Novatos se Enfrentam!","Liguem os Motores: A Prova Chunin Começa!","A Décima Pergunta: Tudo ou Nada","Reportagem Especial: Ao Vivo da Floresta da Morte!","A Prova Chunin 2ª Etapa: A Floresta da Morte!","Comer ou Ser Comido: Pânico na Floresta","O Contra-Ataque de Naruto: Nunca se Renda!","O Sharingan Revivido: Jutsu Chama do Dragão!","A Promessa do Sobrancelhudo: Amor Eterno e Proteção!!","Sakura Floresce!","Formação de Batalha: Ino-Shika-Cho!","Akamaru Treme: A Força Cruel de Gaara","O Segredo do Pergaminho: Não é Permitido Olhar","Clone Contra Clone: Os Meus São Melhores do que os Seus!","Sobrevivendo ao Corte: Os Nove Novatos Juntos Outra Vez!","Estreitando o Campo, Morte Súbita, Eliminação!","O Ciúme do Sobrancelhudo: A Rajada de Leões se Solta!","Kakashi e Orochimaru Cara a Cara","Explosão Kunoichi, As Rivais se Enfrentam!","A Batalha Final: Cha!","A Kunoichi Assassina e o Tremulo Shikamaru","Akamaru se Revela: Quem é o Melhor Cachorro?","Ataque Surpresa: A Arma Secreta de Naruto!","Batalha Byakugan: Hinata Ganha Coragem!","Uma Derrota Digna!!","Gaara Contra Rock Lee: O Poder da Juventude Explode!","A Força Oculta de Lee: Um Jutsu Secreto Proibido!","O Quinto Portão: Um Ninja Esplêndido Nasce!!","Uma Sombra na Escuridão: O Perigo se Aproxima de Sasuke!","Ebisu Volta: O Treinamento Mais Duro de Naruto!","Após Muito Tempo: Jiraiya Retorna!","Jutsu de Invocação: A Sabedoria do Sábio Sapo!!","Um Sentimento de Anseio, Uma Flor Cheia de Esperança","Viva ou Morra: Arrisque Tudo para Ganhar Tudo!","Ele Voa! Ele Salta! Ele Espreita! O Sapo Chefe Aparece!!","Hospital Sitiado: A Mão do Mal Revelada!","As Rodadas Finais: A Corrida Para a Arena de Batalha!","Byakugan Contra Jutsu Clones da Sombra!!","A Derradeira Defesa: No Ponto Zero!","O Verdadeiro Poder do Fracassado!","Bata ou Desista: As Rodadas Finais Ficam Complicadas!","Motivação Zero: O Cara com Inveja da Nuvem!","Folha Dançante, Areia Contorcida","O Jutsu do Sobrancelhudo: Estilo Sasuke!","Atrasado para o Show, mas Pronto para Lutar! A Derradeira Técnica Nasce!","Hora Zero! A Destruição da Aldeia da Folha Começa!","Aldeia em Angústia: Uma Nova Missão Nível A!","O Ocioso é Posto em Ação: Chega de Preguiça!","Uma Luta Incomparável: Hokage contra Hokage!","Um Erro do Passado: O Rosto Revelado!","Técnica Secreta Proibida: Selo Ceifeiro da Morte!","Uma Verdade Surpreendente! A Identidade do Gaara Aparece!","A Decisão de Sasuke: Pressionado ao Extremo!","O Assassino da Noite Enluarada","Luz contra Escuridão: As Duas Faces de Gaara","O Manual do Ninja Naruto!","Além do Limite da Escuridão e Luz!","O Terceiro Hokage, para sempre…!!","O Retorno da Névoa Matutina","Olho no Olho: Sharingan Contra Sharingan!","Jiraiya: O Potencial Desastre do Naruto!","Ruja, Chidori! Irmão Contra Irmão!","Ódio entre os Uchihas: O Último do Clã!","Um Novo Treinamento Começa! Eu Serei Forte!","O Treinamento Continua: Estoure o Balão D'Água!","Ponto Focal! A Marca da Folha!","Uma Escolha Impossível: A Dor Dentro do Coração de Tsunade","Imperdoável! Uma Total Falta de Respeito!","Herança! O Colar da Morte!","Uma Oferta Duvidosa! A Escolha de Tsunade!","Interrupção... O Acordo Acabou!","Atacar! A Fúria do Rasengan!","A Quinta Hokage... Apostando a Vida","Paralisação Completa! O Fim do Sannin!","Sequestrado! A Aventura de Naruto nas Fontes Termais","O Aviso de Tsunade: Ninja Nunca Mais!","A Vontade de Fogo Ainda Queima","Sensei e o Aluno: O Laço dos Shinobi!","Você Precisa Ver! Você Precisa Conhecer! O Verdadeiro Rosto do Kakashi-Sensei!","Missão: Ajudar um Velho Amigo do País do Chá!","A Corrida Começou! Problemas em Alto Mar!","Corre, Idate, Corre... A Ilha Nagi o Aguarda!","Uma Batalha Feroz do Trovão Retumbante!","O Último Arranco: O Ato Final de Desespero","A Batalha Começa: Naruto contra Sasuke!","Rivais Amargos e Laços Desfeitos","Convite da Vila do Som","Formada a Equipe de Resgate do Sasuke!","Som Contra Folha","Motim na Equipe: A União se Defaz!","Força Total! Chouji, arrasa!","Adeus Velho Amigo...! Eu Sempre Acreditarei em Você!","Seu Oponente Sou Eu!","360 Graus de Visão: O Ponto Cego do Byakugan!","Perder Não é Uma Opção!","O Hospedeiro Chega Tarde Demais!","Erro de Cálculo: Um Novo Inimigo Aparece!","Rugidos e Uivos! A Derradeira Equipe de Lutadores","A Batalha de Cada Um","A Distração: O Retorno de Shikamaru!","O Demônio Bonitão da Aldeia da Folha!","Possuído pela Besta","Os Shinobi da Areia: Aliados da Folha","A Luta Final: Gaara contra Kimimaro","Um Golpe Vingativo! A Dança da Samambaia!","Um Grito Para Ouvidos Surdos","Irmãos: Distanciamento Entre os Uchiha","Pai e Filho, o Emblema Partido","Os Segredos do Mangekyo Sharingan","Por Um Amigo","Apelo de um Amigo","O Fim das Lágrimas","A Promessa que Não Pode Ser Cumprida","Disfarce Total!? Uma Super Missão Nível S!","Uma Cidade de Bandidos! A Sombra do Clã Fuuma","Traição Inocente, e um Apelo Fugaz!","Puro Terror! A Casa de Orochimaru","Duas Batidas do Coração: A Armadilha de Kabuto","A Determinação de Sakura!","Os Três Vilões da Prisão de Segurança Máxima","Ton Ton! Eu Estou Contando com Você!","Uma Nova Equipe! Duas Pessoas e Um Cachorro?!","Uma Nova Formação: Ino-Shika-Cho!","A Sombra de Orochimaru","Um Confronto do Destino: Você Não Pode me Vencer!","A Busca Pelo Raro Besouro Bikochu","Qual a Diferença? Todos os Insetos Não São Parecidos?","Uma Batalha de Insetos! Engane e Será Enganado!","Queime Byakugan! Esse É Meu Jeito Ninja de Ser!!","Marcha Fúnebre Para os Vivos!","Uma Lição Aprendida! O Punho de Ferro do Amor!","O Inimigo do Byakugan","As Sinistras Nuvens Negras","O Contra-Ataque de Raiga","Corra! O Curry da Vida","Siga-me! O Grande Desafio de Sobrevivência","O Caçador de Recompensas do Deserto","Caçar ou ser caçado? Decisão no Templo O.K","O Aparecimento dos Estranhos Visitantes","O Guerreiro Amaldiçoado","O Plano do Tático","Tarde Demais para Ajudar","A Morte de Naruto","Quando o Tempo Para","Quando as Garças Batem as Asas","Misturem, Amassem e Ferva! Cozinhe Panela de Cobre! Cozinhe!","Lembranças: A Página Perdida","A Porta Fechada","Infiltração: A Armadilha","Desespero: Um Coração Partido","Batalha no Mar: O Poder Liberado!","Impossível! A Arte Ninja da Celebridade: Jutsu Estilo Dinheiro!","A Caça ao Tesouro Começa!","Corra, Esquive-se em Zigue-zague! Caçar ou Ser Caçado!","Por Favor, Senhor Carteiro!","Encontro! O menino com o Nome de Estrela","A Inesquecível Canção de Ninar","Jutsu Oculto! O Preço da Arte Ninja: Kujaku","Hoshikage: A Verdade Enterrada","Reencontro: O Tempo Restante","A Estrela Radiante","O Longo Dia de Kiba","A Lenda da Aldeia da Folha: O Onbaa!","O Risonho Shino","Aberto para Negócio! O Serviço de Mudanças da Aldeia da Folha","O Mistério dos Mercadores Perseguidos","Um Ilimitado Carregamento de Armas Ninjas","O Byakugan Vê o Ponto Cego!","Previsão: Morte! Céu Nublado com chance de Sol!!","Ino Grita! O Paraíso da Gordura!","O Desafio Dojo Viva! A Juventude tem Tudo a Ver com Paixão!","A Misteriosa Maldição do Castelo Mal Assombrado","A 3ª Super-Besta","Confrontração de Sangue Quente: Aluno Contra Sensei","Crise: A Reunião dos 11 da Folha!","Os ANBU desistem? As Lembranças de Naruto","O Erro do Alvo","O Ajudante Poderoso","Múltiplas Armadilhas! A Contagem Regressiva para a Destruição","As 5 Melhores Batalhas Ninja!","A Decisão de Kurenai: Equipe 8 Dispensada","O Poder Selado de Yakumo","Missão Super-Secreta de Kurenai: A Promessa com o Terceiro...","Genjutsu ou Realidade?","A Habilidade Supostamente Selada","O Peso do Artefato Premiado!","O Inimigo: Ninja Renegado","A Desconcertante Floresta","Recordações das Chamas","Para Cada Um Seu Próprio Caminho","Memórias Desaparecidas","Voltando à Realidade","Um Passado a Ser Apagado","Shukaku é o Alvo","A Aliança da Areia com os Shinobis da Folha","Areia Selada: O Contra-Ataque!","A Derradeira Arma Renasce","A Partida"],
+  ship: ["Voltando pra casa","A Akatsuki Entra em Ação","Os Resultados do Treinamento","O Jinchuuriki da Areia","Kazekage Age Com Bravura","Missão Cumprida","Corra, Kankuro","O Time Kakashi se Mobiliza","As Lágrimas do Jinchuuriki","Jutsu de Selamento: Nove Dragões Fantasmas","A Aprendiz de Ninja Médica","A Determinação da Vovó Aposentada","Um Encontro com o Destino","O Crescimento de Naruto","A Esfera Secreta se Chama...","O Segredo do Jinchuuriki","A Morte do Gaara!","Postura Tática! Operação Entrada em Gancho","Armadilhas Ativadas! Os Inimigos do Time Guy!","Hiruko Contra Duas Kunoichi!","O Verdadeiro Rosto de Sasori!","As Habilidades Secretas de Chiyo!","Pai e Mãe","O Terceiro Kazekage","Três Minutos Entre a Vida e a Morte","Luta de Marionetes: 10 contra 100","Um Sonho Impossível","As Feras Ressucitadas","Kakashi Iluminado","A Estética de um Momento","O Legado","A Volta do Kazekage","Um Novo Alvo","Formação! Um Novo Time Kakashi","Uma Adição Indesejada","O Falso Sorriso","Sem Título","Simulação","A Ponte Tenchi","A Nove-Caudas se Liberta!!","A Missão Super Secreta Se Inicia","Orochimaru vs. Jinchuuriki","As Lágrimas de Sakura","O Segredo da Batalha","As Consequências da Traição","A Página Inacabada","Infiltração! O Covil da Cobra","Laços","Algo Importante","A História do Álbum Ilustrado","Reencontro","O Poder do Uchiha","Título","Pesadelo","Vento","Contorção","Sono Roubado","Solidão","Um Novo Inimigo","Impermanência","Contato","Companheiro de Equipe","Os Dois Reis","O Sinal do Jato de Fogo Negro","Bloqueio das Trevas","Almas Revividas","Luta de Todos Para a Morte","Momento de Despertar","Desespero","Ressonância","Meu Amigo","A Ameaça Silenciosamente Se Aproxima","Invasão da Akatsuki","Sob o Céu Estrelado","Oração do Velho Monge","O Próximo Passo","Escalada de Prata","O Julgamento","Um Grito Interrompido","Últimas Palavras","Notícias Tristes","Equipe 10","Alvo Na Mira!","As Habilidades de Kakuzu","O Terrível Segredo","O Gênio Shikamaru","Quando se Amaldiçoa Alguém, Cava-se o Próprio Túmulo","Estilo Vento: Rasen Shuriken!","O Preço do Poder","A Determinação de Um Shinobi","O Esconderijo de Orochimaru É Descoberto!","Encontro","Conectando Corações","Uma Noite Chuvosa","Os Dois Amuletos","O Inimigo Invisível","O Labirinto dos Reflexos Distorcidos","O Alvo é Revelado","A Besta de Cauda Barulhenta","Dentro da Nevoeiro","Os Sentimentos de Cada Um","Reagrupando!","A Barreira de Selamento de Quatro Pontas","Quebrando o Estilo Cristal","A Batalha Pela Barreira","A Camélia Vermelha","Estranhos Companheiros","O Caminho das Camélias","O Contra-Ataque da Marca da Maldição","Consciência Culpada","A Promessa Quebrada","Um Lugar para Retornar","O Discípulo da Serpente","O Olho do Falcão","A Espada de Zabuza","A Guardiã da Muralha de Ferro","Jugo do Esconderijo do Norte","Formação!","Crônicas de Kakashi: A Vida de um Menino no Campo de Batalha - Parte 1","Crônicas de Kakashi: A Vida de um Menino no Campo de Batalha - Parte 2","Reunir","A Caçada","Colisão!","Arte","Desaparecimento","Crepúsculo","Contos de um Ninja Corajoso: Pergaminhos-ninja de Jiraya - Parte 1","Contos de um Ninja Corajoso: Pergaminhos-ninja de Jiraya - Parte 2","Infiltração! A Vila Oculta da Chuva","O Homem que Virou Deus","Ativar! Modo Sábio","Apresentando, os Seis Caminhos de Pain","O Conto do Valente","Convite Para o Banquete","O Momento Mais Longo...","A Luz e a Escuridão do Mangekyo Sharingan","Reino das Chamas Infernais","O Fim","O Mistério de Tobi","Destino","Verdade","A Batalha do Desfiladeiro do Trovão","Oito Caudas Versus Sasuke","Andarilho","Sucessora do Jutsu Proibido","O Desejo da Sucessora","O Passado do Ninja Renegado","Herdeira da Escuridão","Separação","Jutsu Probido Liberado","Mestre e Aluno","Notícia Sombria","Seguindo a Sombra do Mestre","Decodificação","O Primeiro Desafio","Superando o Mestre","Ataque à Aldeia Oculta da Folha!","O Poder de Acreditar","Pain versus Kakashi","O Mistério de Pain","Sobrenome: Sarutobi! Nome: Konohamaru!","Pain para o Mundo","Explosão! Modo Sábio","Perigo! Limite do Modo Sábio Atingido","Nove Caudas Capturada!","Confissões","Devastação Planetária","Quarto Hokage","Os Dois Discípulos","Grande Aventura! Em Busca do Legado do Quarto Hokage - Parte 1","Grande Aventura! Em Busca do Legado do Quarto Hokage - Parte 2","Encontro","A Origem de Pain","O Conto de Naruto Uzumaki","O Herói da Folha","O Novo Instrutor, Iruka","A Provação de Iruka","A Decisão de Iruka","Kakashi Hatake, o Jounin Encarregado","A Coragem de Inari Colocada à Prova","A Escola de Vingança do Naruto","Os Laços de Gaara","Narutodemia!","Time Tenten em Missão!","Distrito Animal","O Remédio da Juventude","O Mestre Corajoso e o Seu Discípulo, Treinamento","Memórias de um Mestre Corajoso e o Seu Discípulo","Crônicas da Folha: a enciclopédia de patas de Sasuke","Naruto e o Velho Soldado","A Canção de Amor de Kakashi","A História de Neji","O homem que morreu duas vezes","A Pior Corrida de Três Pernas","O Trabalho em Equipe do Time 10","Vá para a Escuridão","O sexto hokage Danzo","Véspera da conferência dos cinco Kage","Que entrem os cinco kage!","O pedido de Naruto","Decisão dolorosa","Raio ágil","O jeito ninja de Sasuke","O poder dos cinco Kage","Guerra declarada","Os sentimentos de Sakura","Besta de cauda contra besta sem cauda","Como um amigo","O braço direito de Danzo","O jutsu visual proibido","Danzo Shimura","A determinação de Sakura","Laços desfeitos","O fardo","Dois destinos","Ninjas de alto nível","Infiltrado","As cinco grandes nações se mobilizam","Kakashi Hatake, o hokage","A profecia do Grande Lorde Ancião","Armazenamento","A decisão dos cinco kages","O jovem e o mar","O ninja de Benisu","O navio fantasma","A ilha do navio de guerra","A ilha esquecida","Lute, Rock Lee!","Coma ou morra! Cogumelos do inferno!","A revolta dos clones","A rota fechada","As meninas se reúnem","O Naruto impostor","O aluno favorito de Naruto","A ninja da aldeia Nadeshiko","Amigos em quem confiar","Ah, minha heroína Tsunade!","O dia de folga do Sai","O lendário Ino-Shika-Cho","A determinação de Kiba","Kakashi, meu eterno rival!","O voto de Naruto","Terra à vista! Será essa a ilha paradisíaca?","Killer Bee e Motoi","Próximo desafio! Naruto versus Nove Caudas","O Brilho Laranja","Alvo: o Nove Caudas","A Batalha Mortal do Quarto!!","Obrigada","Batalha no paraíso! Besta Esquisita versus O Monstro!","O Homem Conhecido como Kisame","O anjo que traz a morte","A Ponte para a Paz","Missão Rank-S Ultra Secreta","O Retorno do Artista","Reúnam-se! Forças Aliadas Shinobi!","Encontro","Rivais","Rachaduras","Separação","Pelo Meu Amigo","Começa a Guerra!","Sai e Shin","Os Segredos do jutsu de Reanimação","O Retorno de um Antigo Inimigo","O Primeiro e o Último Adversário","O Brilhante Conselheiro Estrategista da folha","Campo de Batalha!","Palavras Proibidas","Laços Dourados","O Caminho de Sakura","Mifune versus Hanzou","A Verdadeira Gentileza","A Formação Ino-Shika-Cho Completa!!","Uma Mensagem do Coração","O Ataque da Estátua Gedo","Sinal uníssono","Ninjas Médicos em Perigo","A Armadilha do Zetsu Branco","A Estética do Artista","Aliança Materna!!","História Secreta: A Dupla Mais Forte!!","Dois Sóis!!","O Destruidor de Elmos: Akebino Jinin!","Usuária do Estilo Calor! Pakura da Areia Oculta","Aquilo que Não se Pode Recuperar","Alguém em Que se Pode Apostar","Perigo, o Combo Jinpachi e Kushimaru!!","Espada Relâmpago!! Ameyuri Ringo","Poder - Episódio 1","Poder - Episódio 2","Poder - Episódio 3","Poder - Episódio 4","Poder - Episódio 5","Poder - Episódio Final","Naruto Entra na Batalha!","A esperança de um pai, o amor de uma mãe","Contato! Naruto contra Itachi","O reconhecido","O Mizukage, o molusco gigante e a miragem","Paradoxo","Terror: o demônio do vapor","Fantasmas do Passado","O jutsu de viagem ao submundo","Os vingativos","O Olho do Coração","Desaparecendo no Luar","A Noite de Lua Crescente","A missão Rank-A: batalha de comida","O castelo decaído","Prólogo do caminho do ninja","O velho mestre e o olho do dragão","Chuva seguida por neve, com alguns relâmpagos","O banho de sol triste","Vagarosa neve","As forças aliadas reanimadas","Shino versus Torune!","Um buraco no coração: o outro Jinchuriki","A alma que habita a marionete","Corra, Omoi!","Reforços chegam","Madara Uchiha","Os cinco Kage se reúnem","A máscara inquebrável e a bolha","Jinchūriki versus Jinchūriki!!","Quatro Caudas, o rei dos macacos sábios","Nove Caudas","Kurama","Equipe de dois","Promessa de Vitória","Os olhos que enxergam na escuridão","Vontade da Pedra","Os riscos do Jutsu de Reanimação","Time de irmãos","A Folha de Cada Um","Kabuto Yakushi","Izanami ativado","Izanagi e Izanami","Eu Sempre Vou Te Amar","Jutsu de Reanimação: liberar!","O retorno de Orochimaru","O segredo da técnica de transporte","Quem é você?","Obito e Madara","Estou no inferno!","Mundo dos sonhos","Sombras arrepiantes","A nova Akatsuki","Kakashi: sombra dos caçadores Especiais ANBU – uma máscara que esconde o coração","Kakashi: sombra dos caçadores Especiais ANBU – A morte de Minato","Kakashi: sombra dos caçadores Especiais ANBU – As Células do Hashirama","Kakashi: sombra dos caçadores Especiais ANBU – O Ninja patife,Orochimaru","Kakashi: sombra dos caçadores Especiais ANBU – A Cobaia do Orochimaru","Kakashi: sombra dos caçadores Especiais ANBU – Seus próprios caminhos","Kakashi: sombra dos caçadores Especiais ANBU – O Alvo, Sharingan","Kakashi: sombra dos caçadores Especiais ANBU – Um Shinobi da Folha","Kakashi: sombra dos caçadores Especiais ANBU – Um ANBU Uchiha","Kakashi: sombra dos caçadores Especiais ANBU –Golpe de Estado","Kakashi: sombra dos caçadores Especiais ANBU – A Noite da Tragédia","Kakashi: sombra dos caçadores Especiais ANBU –Líder Jonin","Kakashi: sombra dos caçadores Especiais ANBU –Equipe Sete","A Determinação de Kakashi","O Jutsu das forças Aliadas Shinobi!","Os laços que formam vínculos","Aqueles que dançam nas sombras","Aqueles que tudo sabem","Hashirama e Madara","A Era dos Estados em Guerra","Meu verdadeiro sonho","A Resposta de Sasuke","Buraco","Algo que Preenche o buraco","Equipe 7 reunir!","O Novo Trio do impasse mortal","Kakashi vs Obito","Edição extras: Instruções Para Capturar a nove caudas","Edição extras: Naruto contra Naruto Robô","O Jinchuriki do dez caudas","Uma Abertura","O Dia em Que Naruto Nasceu","A Árvore Divina","O Sonho de um Shinobi","Perseguindo a Esperança","Um coração cheio de companheiro","Obito Uchiha","Estou sempre te observando","A promessa que foi mantida","Meu Primeiro Amigo","A adorada irmã mais velha","A Decisão de Hanabi","A ascensão de Madara Uchiha","O coração Escondido","Um Verdadeiro Fim","A Nova prova chunin","Começa a prova chunin","As Três Questões","Alguém digno de Ser Líder","A noite antes da segunda prova","Sobrevivência no Deserto Infernal","Como um Usuário de Taijutsu...","O Final","Fuga E Perseguição","Coragem Sem limites","Os Problemas de Tenten","A Dupla encarcerada","O Meu Lugar","O ninjutsu secreto do clã Yamanaka","A Marionete Amaldiçoada","Sua retaguarda","O Início do plano secreto","A almejada Besta com caudas","A decisão de Nejin","Esperanças para o futuro","À Beira da Morte","Os Dois Mangekyo","A Formação Da Equipe Minato","Você será o meu apoio","A Besta azul contra Os Seis Caminhos de Madara","A Juventude do Papai","A Formação dos oitos portais internos","O Sábio dos Seis Caminhos","Aqueles Que Herdaram","O Rival de Naruto","Elevação","O Sonho Infinito","O Tsukuyomi Infinito","O Mundo dos Sonhos","O Lugar de Tenten","Killer Bee Rappuden:parte1","Killer Bee Rappuden:parte2","Para ver Aquele Sorriso, Só mais uma vez","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:O Ninja Perdedor","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:A Missão de Busca","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Equipe Jiraiya","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Prioridades","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: O Homem Mascarado","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:O Poder Selado","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:Regras ou Companheiros?","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:A Criança da Profecia","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:O Pássaro Engaiolado","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Voltando para casa","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:O Caminho Mútuo","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: A Diferença de Poder","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:Saindo da aldeia","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:Perseguidores","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Conflito","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Outra Lua","Os pergaminhos ninja de Jiraya:O conto do herói Naruto: Companheiro","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:Os ninjas se unem","Os pergaminhos ninja de Jiraya:O conto do herói Naruto:Rivais","A história de Itachi – Luz e trevas: Nascimento e morte","A história de Itachi – Luz e trevas:O Gênio","A história de Itachi – Luz e trevas: A dor de Viver","A história de Itachi – Luz e trevas: O Pedido de Shisui","A história de Itachi – Luz e trevas:Noite de Luar","A história de Itachi – Luz e trevas:A Escuridão da Akatsuki","A história de Itachi – Luz e trevas:Parceiro","A história de Itachi – Luz e trevas:Verdade","A Deusa dos primórdios","Kaguya Otsutsuki","Hagoromo e Hamura","Um Passado Fabricado","O Ninja Mais Imprevisível do Mundo!","Ninshu:O credo ninja","Ashura e Indra","A Tumultuosa Jornada","A Decisão de Ashura","O Sucessor","Uma Missão Especial","Conectando pensamentos","Aquele dois...Sempre","É Melhor Você...","O Sharingan revivido","Parabéns","O Vale do Fim","A Batalha Final","Naruto e Sasuke","O Símbolo da União","Narutoǃǃ Uzumaki","Naruto e Hinata","Sasuke e Sakura","Gaara e Shikamaru","Jiraiya e Kakashi","A História do Sasuke:Nascer do Sol,parte1: Os Humanos Explosivos","A História do Sasuke:Nascer do Sol,parte2: Coliseu","A História do Sasuke:Nascer do Sol,parte3:Fuushin","A História do Sasuke:Nascer do Sol,parte4:O Ketsuyugan","A História do Sasuke:Nascer do Sol,parte5:A Última Pessoa","A História do Shikamaru uma nuvem vagando pela Escuridão Silenciosa,parte1: O Estado das coisas","A História do Shikamaru uma nuvem vagando pela Escuridão Silenciosa,parte2:Nuvens Negras","A História do Shikamaru uma nuvem vagando pela Escuridão Silenciosa,parte3: Imprudência","A História do Shikamaru uma nuvem vagando pela Escuridão Silenciosa,parte4:Nuvem de Suspeitas","A História do Shikamaru uma nuvem vagando pela Escuridão Silenciosa,parte5:Alvorecer","História da História da Aldeia da Folha:O Dia perfeito para o Casamento,parte1: O Casamento do Naruto","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte2: O Presente de Casamento todo Poderoso","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte3: Vapor e Pílulas de Comida","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte4: O Presente do Kazekage","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte5:Última Missão","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte6:O Resultado da Missão Secreta","História da Aldeia da Folha:O Dia perfeito para o Casamento,parte7: A Mensagem"]
+};
+
+function numberSet(spec) {
+  const out = new Set();
+  spec.split(',').forEach(part => {
+    const [a,b] = part.split('-').map(Number);
+    for(let n=a; n<=(b||a); n++) out.add(n);
+  });
+  return out;
+}
+
+// Classificação episódio a episódio (mangá/canônico, misto e filler).
+const EPISODE_GUIDE = {
+  classic: {
+    mixed:numberSet('7,9,14-16,18-21,23-24,27-30,37-41,43-47,49,52-60,63,66,69-72,74,83,98-100,112-114,126-127,130-131,141-142,220'),
+    filler:numberSet('26,97,101-106,136-140,143-219')
+  },
+  ship: {
+    mixed:numberSet('1-19,24-25,45,49-50,54,56,89-90,113,115,127-128,213,254,296,324,327-328,330-331,338,346,362,385-386,415,419,426,451-458,460-462,469,471-472,478-479'),
+    filler:numberSet('57-71,91-112,144-151,170-171,176-196,223-242,257-260,271,279-281,284-295,303-320,347-361,376-377,388-390,394-413,416-417,422-423,427-450,464-468,480-483')
+  }
+};
+
+// Trechos de transição recomendados por guias de visualização sem fillers.
+// O tempo pode variar alguns segundos conforme abertura/créditos da plataforma.
+const MINUTE_GUIDE = {
+  classic: {
+    220:'Assistir de 12:02 até o final. Pule de 00:00 a 12:01.'
+  },
+  ship: {
+    54:'Assistir de 00:00 a 18:35. Depois disso, pode pular.',
+    55:'Assistir de 00:00 a 18:50. Depois disso, pode pular.',
+    56:'Assistir de 00:00 a 18:50. Depois disso, pode pular.',
+    71:'Pular até 19:55 e assistir de 19:55 até o final.',
+    89:'Assistir de 00:00 a 17:33. Depois disso, pode pular.',
+    112:'Pular até 13:40 e assistir de 13:40 até o final.',
+    176:'Assistir de 00:00 a 04:00. O restante pode ser pulado.',
+    178:'Pular até 18:02 e assistir de 18:02 até o final.',
+    179:'Assistir de 00:00 a 04:04. O restante pode ser pulado.',
+    180:'Assistir de 00:00 a 02:13; pular até 20:34; assistir de 20:34 até o final.',
+    181:'Pular até 18:17 e assistir de 18:17 até o final.',
+    346:'Assistir de 00:00 a 12:35. O restante pode ser pulado.',
+    414:'Assistir de 00:00 a 13:10. O restante pode ser pulado.',
+    415:'Assistir de 00:00 a 13:10. O restante pode ser pulado.',
+    417:'Pular até 16:55 e assistir de 16:55 até o final.',
+    426:'Assistir de 00:00 a 12:40. O restante pode ser pulado.',
+    451:'Assistir de 00:00 a 09:42. O restante pode ser pulado.',
+    458:'Pular até 09:55 e assistir de 09:55 até o final.'
+  }
+};
+
+const CLASSIC_ARCS = [
+  { id:'c1', name:'Formação do Time 7', start:1, end:7, type:'canon', emoji:'🍥',
+    beats:[[1,3,'Naruto vira ninja e forma o Time 7'],[4,7,'Primeiras missões e o teste do sino']] },
+  { id:'c2', name:'País das Ondas', start:8, end:19, type:'canon', emoji:'🌊',
+    beats:[[8,10,'Missão vira rank A: Zabuza ataca'],[11,15,'Treinamento na árvore e o mistério de Haku'],[16,19,'Duelo final contra Zabuza e Haku']],
+    cry:[19] },
+  { id:'c3', name:'Exames Chunin', start:20, end:67, type:'canon', emoji:'📜',
+    beats:[[20,26,'Prova escrita com Ibiki'],[27,33,'Floresta da Morte'],[34,43,'Duelos preliminares'],[44,49,'Treinamento para a prova final'],[50,58,'Início do torneio'],[59,67,'Invasão de Konoha e morte do 3º Hokage']],
+    cry:[61,62] },
+  { id:'c4', name:'Em Busca de Tsunade', start:68, end:80, type:'canon', emoji:'💊',
+    beats:[[68,72,'Jiraiya leva Naruto atrás de Tsunade'],[73,80,'Confronto com Orochimaru e Kabuto']] },
+  { id:'c5', name:'Preparativos', start:81, end:100, type:'canon', emoji:'🔍',
+    beats:[[81,90,'Investigação sobre a Akatsuki'],[91,100,'Missões antes do resgate de Sasuke']] },
+  { id:'c6', name:'País do Chá (filler)', start:101, end:106, type:'filler', emoji:'🍵',
+    beats:[[101,106,'Arco filler — pode pular sem prejuízo']] },
+  { id:'c7', name:'Resgate de Sasuke', start:107, end:135, type:'canon', emoji:'⚔️',
+    beats:[[107,115,'Formação da equipe de resgate'],[116,125,'Duelos pelo caminho'],[126,132,'Shikamaru vs Tayuya, Kimimaro aparece'],[133,135,'Vale do Fim: Naruto vs Sasuke']],
+    cry:[133,134,135] },
+  { id:'c8', name:'Sagas filler pré-Shippuden', start:136, end:220, type:'filler', emoji:'🌀',
+    beats:[[136,213,'Arcos filler — podem pular sem prejuízo'],[214,216,'Kakashi Gaiden — o passado do Kakashi (canônico!)'],[217,220,'Arco filler final antes de Shippuden']],
+    beatMinuteTip:{range:[214,216], tip:'Episódio inteiro é canônico — assistam completo, sem pular nada.'},
+    cry:[215,216] },
+];
+ 
+const SHIP_ARCS = [
+  { id:'s1', name:'Resgate do Kazekage', start:1, end:32, type:'canon', emoji:'🏜️',
+    beats:[[1,3,'Naruto volta a Konoha após o treino'],[4,9,'A Akatsuki entra em ação'],[10,17,'Gaara é capturado, Chiyo relembra Sasori'],[18,25,'Sakura e Chiyo vs Sasori'],[26,32,'Resgate final de Gaara']],
+    cry:[17] },
+  { id:'s2', name:'Reencontros em Konoha (filler)', start:33, end:53, type:'filler', emoji:'🍃',
+    beats:[[33,53,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s3', name:'Missão na Ponte Tenchi', start:54, end:71, type:'semi', emoji:'🌉',
+    beats:[[54,60,'Nova missão da equipe Kakashi'],[61,71,'Confronto na Ponte Tenchi']],
+    beatMinuteTip:{range:[54,71], tip:'Anime-original mas baseado em material paralelo do mangá — não contradiz a história principal, porém tem ritmo mais lento. Dá pra assistir inteiro ou só resumir mentalmente e seguir.'} },
+  { id:'s4', name:'Missões diversas (filler)', start:72, end:88, type:'filler', emoji:'🎯',
+    beats:[[72,88,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s5', name:'Hidan &amp; Kakuzu', start:89, end:112, type:'canon', emoji:'💀',
+    beats:[[89,96,'Time Asuma enfrenta a Akatsuki'],[97,104,'Shikamaru busca vingança contra Hidan'],[105,112,'Batalha final e a despedida de Asuma']],
+    cry:[112] },
+  { id:'s6', name:'As Três Caudas (filler)', start:113, end:143, type:'filler', emoji:'🐙',
+    beats:[[113,143,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s7', name:'Perseguição a Itachi', start:144, end:151, type:'canon', emoji:'👁️',
+    beats:[[144,151,'Equipe Kakashi rastreia Itachi Uchiha']] },
+  { id:'s8', name:'Missões diversas II (filler)', start:152, end:175, type:'filler', emoji:'🎯',
+    beats:[[152,175,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s9', name:'Mestre &amp; Aprendiz', start:176, end:196, type:'canon', emoji:'🐸',
+    beats:[[176,183,'Jiraiya investiga o Caminho do Pain'],[184,191,'Jiraiya vs os Seis Caminhos do Pain'],[192,196,'A morte de Jiraiya e sua última mensagem']],
+    cry:[193,194,195,196] },
+  { id:'s10', name:'Ataque a Konoha — Pain', start:197, end:220, type:'canon', emoji:'☔',
+    beats:[[197,204,'Pain ataca Konoha'],[205,213,'A vila é destruída, Hinata se sacrifica'],[214,220,'Naruto vs Pain e o discurso final']],
+    cry:[215,216,217] },
+  { id:'s11', name:'Os Cinco Kages', start:221, end:242, type:'canon', emoji:'👑',
+    beats:[[221,230,'Cúpula dos Cinco Kages'],[231,242,'Sasuke desafia os Kages']] },
+  { id:'s12', name:'Ambientação (filler)', start:243, end:257, type:'filler', emoji:'🎯',
+    beats:[[243,257,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s13', name:'Itachi vs Sasuke', start:258, end:260, type:'canon', emoji:'🌙',
+    beats:[[258,260,'A batalha final entre os irmãos e a verdade revelada']],
+    cry:[258,259,260] },
+  { id:'s14', name:'Time Kakashi vs Cão-Ninja (filler)', start:261, end:265, type:'filler', emoji:'🐕',
+    beats:[[261,265,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s15', name:'Prelúdio da Guerra', start:266, end:295, type:'canon', emoji:'⚡',
+    beats:[[266,277,'Segredos do passado de Itachi'],[278,295,'A Aliança Shinobi se prepara para a guerra']] },
+  { id:'s16', name:'A Guerra Começa', start:296, end:321, type:'canon', emoji:'🗡️',
+    beats:[[296,310,'Divisão dos exércitos, primeiros confrontos'],[311,321,'Zetsu brancos e o Edo Tensei em ação']] },
+  { id:'s17', name:'Paraíso Numa Balsa (filler)', start:322, end:340, type:'filler', emoji:'⛵',
+    beats:[[322,340,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s18', name:'Fronte de Batalha', start:341, end:360, type:'canon', emoji:'🛡️',
+    beats:[[341,350,'Batalhas na linha de frente'],[351,360,'Reencontros com shinobis revividos']] },
+  { id:'s19', name:'O Poder do Time 7', start:361, end:376, type:'canon', emoji:'🌀',
+    beats:[[361,368,'Naruto e Sasuke entram na guerra'],[369,376,'Confronto com Madara Uchiha']] },
+  { id:'s20', name:'Obito e o Passado', start:377, end:421, type:'canon', emoji:'😷',
+    beats:[[377,390,'O passado de Obito e Rin é revelado'],[391,405,'A queda de Obito e o nascimento da máscara'],[406,421,'Kakashi confronta Obito no presente']],
+    cry:[399,400,420,421] },
+  { id:'s21', name:'Interlúdio (filler)', start:422, end:423, type:'filler', emoji:'🎯',
+    beats:[[422,423,'Episódios filler curtos — pode pular']] },
+  { id:'s22', name:'A Verdade de Kaguya', start:424, end:450, type:'canon', emoji:'🌑',
+    beats:[[424,435,'O verdadeiro plano por trás da guerra'],[436,450,'Madara e o Olho da Lua Infinito']] },
+  { id:'s23', name:'Naruto &amp; Sasuke Unidos', start:451, end:458, type:'canon', emoji:'🤝',
+    beats:[[451,458,'Os dois se unem contra Madara']] },
+  { id:'s24', name:'Sunny Side Battle (filler)', start:459, end:468, type:'filler', emoji:'☀️',
+    beats:[[459,468,'Arco filler — pode pular sem prejuízo']] },
+  { id:'s25', name:'O Fim da Guerra', start:469, end:479, type:'canon', emoji:'💥',
+    beats:[[469,474,'Kaguya é invocada'],[475,479,'A batalha contra Kaguya']],
+    cry:[470,471] },
+  { id:'s26', name:'Pequenos momentos (filler)', start:480, end:483, type:'filler', emoji:'🎯',
+    beats:[[480,483,'Arco filler curto — pode pular']] },
+  { id:'s27', name:'Batalha Final &amp; Epílogo', start:484, end:500, type:'canon', emoji:'🌅',
+    beats:[[484,490,'Naruto vs Sasuke no Vale do Fim'],[491,495,'O confronto decisivo'],[496,500,'Epílogo e reconstrução de Konoha']],
+    cry:[495,496,497,498,499,500] },
+];
+ 
+const MOVIES = [
+  { id:'m1', name:'Ninja Clash in the Land of Snow', year:2004, canon:false, when:'Depois do ep. 101 (Clássico)' },
+  { id:'m2', name:'Legend of the Stone of Gelel', year:2005, canon:false, when:'Depois do ep. 160 (Clássico)' },
+  { id:'m3', name:'Guardians of the Crescent Moon Kingdom', year:2006, canon:false, when:'Depois do ep. 200 (Clássico)' },
+  { id:'m4', name:'Naruto Shippuden the Movie', year:2007, canon:false, when:'Depois do ep. 72 (Shippuden)' },
+  { id:'m5', name:'Bonds', year:2008, canon:false, when:'Depois do ep. 143 (Shippuden)' },
+  { id:'m6', name:'The Will of Fire', year:2009, canon:false, when:'Depois do ep. 175 (Shippuden)' },
+  { id:'m7', name:'The Lost Tower', year:2010, canon:false, when:'Depois do ep. 196 (Shippuden)' },
+  { id:'m8', name:'Blood Prison', year:2011, canon:false, when:'Depois do ep. 220 (Shippuden)' },
+  { id:'m9', name:'Road to Ninja', year:2012, canon:'semi', when:'Depois do ep. 321 (Shippuden)' },
+  { id:'m10', name:'The Last: Naruto the Movie', year:2014, canon:true, when:'Depois do ep. 500 — epílogo romântico', cry:true },
+  { id:'m11', name:'Boruto: Naruto the Movie', year:2015, canon:true, when:'Depois de The Last — ponte para Boruto' },
+  { id:'m12', name:'OVA: Find the Crimson Four-Leaf Clover', year:2001, canon:false, when:'Extra leve, qualquer momento' },
+  { id:'m13', name:'OVA: Mission — Protect the Waterfall Village', year:2002, canon:false, when:'Extra leve, qualquer momento' },
+  { id:'m14', name:'OVA especial: Sunny Side Battle', year:2013, canon:false, when:'Junto ao arco Sunny Side Battle' },
+];
+ 
+function buildEpisodes(arcs, saga){
+  const guide = EPISODE_GUIDE[saga];
+  arcs.forEach(arc=>{
+    arc.episodes=[];
+    for(let n=arc.start;n<=arc.end;n++){
+      const type = guide.filler.has(n) ? 'filler' : guide.mixed.has(n) ? 'semi' : 'canon';
+      const minuteTip = MINUTE_GUIDE[saga][n] || (type==='semi'
+        ? 'Episódio misto: há conteúdo do mangá e expansão do anime. Sem um corte de tempo verificado, assistam completo para não perder cenas canônicas.'
+        : null);
+      arc.episodes.push({
+        id:'ep-'+arc.id+'-'+n,
+        num:n,
+        type,
+        beat:EPISODE_TITLES[saga][n-1],
+        minuteTip,
+        cry:(arc.cry||[]).includes(n)
+      });
+    }
+    const kinds = new Set(arc.episodes.map(ep=>ep.type));
+    arc.type = kinds.size===1 ? arc.episodes[0].type : 'semi';
+  });
+}
+buildEpisodes(CLASSIC_ARCS, 'classic');
+buildEpisodes(SHIP_ARCS, 'ship');
+ 
+/* =========================================================
+   STATE
+   ========================================================= */
+const STORAGE_KEY = 'naruto-tracker-progress-casal';
+let state = { episodes:{}, movies:{} };
+function getEp(id){ if(!state.episodes[id]) state.episodes[id]={watched:false,rating:0,date:'',note:''}; return state.episodes[id]; }
+function getMovie(id){ if(!state.movies[id]) state.movies[id]={watched:false,rating:0,date:'',note:''}; return state.movies[id]; }
+ 
+let saveTimer=null;
+function scheduleSave(){ clearTimeout(saveTimer); saveTimer=setTimeout(saveState,600); }
+async function saveState(){ try{ await window.storage.set(STORAGE_KEY, JSON.stringify(state), true); }catch(e){ console.error(e); } }
+async function loadState(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY, true);
+    if(res && res.value){ state = Object.assign({episodes:{},movies:{}}, JSON.parse(res.value)); }
+  }catch(e){ /* nothing saved yet */ }
+  renderAll();
+}
+ 
+/* =========================================================
+   NAV
+   ========================================================= */
+function showView(id){
+  document.querySelectorAll('section.view').forEach(s=>s.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.remove('active'));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+let currentSeason='classic';
+document.addEventListener('click', e=>{
+  const navBtn = e.target.closest('[data-nav]');
+  if(navBtn){
+    const target = navBtn.dataset.nav;
+    document.querySelectorAll('nav.bottom button').forEach(b=>b.classList.toggle('active', b.dataset.nav===target));
+    if(target==='path-classic'){ currentSeason='classic'; renderPath(); showView('path'); }
+    else if(target==='path-ship'){ currentSeason='ship'; renderPath(); showView('path'); }
+    else showView(target);
+    return;
+  }
+  const seasonBtn = e.target.closest('[data-open-season]');
+  if(seasonBtn){ currentSeason=seasonBtn.dataset.openSeason; renderPath(); showView('path'); }
+});
+document.getElementById('continueGo').addEventListener('click', ()=>{
+  const c = findContinue();
+  if(!c) return;
+  currentSeason = c.saga;
+  renderPath();
+  showView('path');
+  setTimeout(()=>openSheet(c.arc), 150);
+});
+ 
+/* =========================================================
+   PATH RENDER
+   ========================================================= */
+function arcStats(arc){
+  let watched=0;
+  arc.episodes.forEach(ep=>{ if(getEp(ep.id).watched) watched++; });
+  return {watched, total:arc.episodes.length};
+}
+function seasonArcs(){ return currentSeason==='classic' ? CLASSIC_ARCS : SHIP_ARCS; }
+ 
+function renderPath(){
+  document.getElementById('pathTitle').textContent = currentSeason==='classic' ? 'Naruto Clássico' : 'Naruto Shippuden';
+  const arcs = seasonArcs();
+  let watched=0, total=0;
+  arcs.forEach(a=>{ const s=arcStats(a); watched+=s.watched; total+=s.total; });
+  document.getElementById('pathProgress').textContent = `${watched} / ${total} episódios assistidos`;
+ 
+  const wrap = document.getElementById('pathNodes');
+  wrap.innerHTML='';
+  arcs.forEach((arc,i)=>{
+    const {watched:w, total:t} = arcStats(arc);
+    const done = w===t;
+    const row = document.createElement('div');
+    row.className = 'node-row ' + (i%2===0?'left':'right');
+    row.innerHTML = `
+      <div style="position:relative;">
+        <div class="node ${done?'done':'type-'+arc.type} press" data-arc="${arc.id}">
+          <span>${arc.emoji}</span>
+          ${done?'<div class="node-check">✓</div>':''}
+        </div>
+        <div class="node-label">${arc.name}<br><span style="font-weight:600; color:#8a869a;">${w}/${t}</span></div>
+      </div>
+    `;
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll('[data-arc]').forEach(el=>{
+    el.addEventListener('click', ()=> openSheet(arcs.find(a=>a.id===el.dataset.arc)) );
+  });
+  // extra bottom margin for labels of last row
+  wrap.style.paddingBottom = '50px';
+}
+ 
+/* =========================================================
+   SHEET (episode list per arc)
+   ========================================================= */
+let openArcId=null;
+function openSheet(arc){
+  openArcId = arc.id;
+  document.getElementById('sheetTitle').textContent = arc.emoji+' '+arc.name;
+  document.getElementById('sheetSub').textContent = `Ep. ${arc.start}–${arc.end} · ${arc.type==='canon'?'🔵 Canônico':arc.type==='semi'?'🟡 Semi-cânone':'⚪ Filler (opcional)'}`;
+  const tipEl = document.getElementById('sheetTip');
+  tipEl.innerHTML = arc.beatMinuteTip ? `<div class="sheet-tip">⏱️ ${arc.beatMinuteTip.tip}</div>` : '';
+ 
+  const body = document.getElementById('sheetBody');
+  body.innerHTML='';
+  arc.episodes.forEach(ep=> body.appendChild(renderEpisodeItem(ep, arc)) );
+ 
+  document.getElementById('sheetBackdrop').classList.add('open');
+  document.getElementById('sheet').classList.add('open');
+}
+function closeSheet(){
+  document.getElementById('sheetBackdrop').classList.remove('open');
+  document.getElementById('sheet').classList.remove('open');
+  renderAll();
+}
+document.getElementById('sheetClose').addEventListener('click', closeSheet);
+document.getElementById('sheetBackdrop').addEventListener('click', closeSheet);
+ 
+function renderEpisodeItem(ep, arc){
+  const st = getEp(ep.id);
+  const div = document.createElement('div');
+  div.className='ep-item';
+  div.innerHTML = `
+    <div class="ep-row" data-toggle="${ep.id}">
+      <input type="checkbox" data-check="${ep.id}" ${st.watched?'checked':''}>
+      <div class="ep-num">#${ep.num}</div>
+      <div class="ep-dot dot-${ep.type}"></div>
+      <div class="ep-title">${ep.beat}${ep.cry?' <span class="ep-cry">😢</span>':''}</div>
+      <div class="ep-caret">▾</div>
+    </div>
+    <div class="ep-detail" id="detail-${ep.id}">
+      ${ep.minuteTip ? `<div class="ep-tip-mini">⏱️ ${ep.minuteTip}</div>` : ''}
+      <div class="stars">${[1,2,3,4,5].map(n=>`<span data-star="${n}" class="${st.rating>=n?'on':''}">★</span>`).join('')}</div>
+      <input type="date" data-date value="${st.date||''}">
+      <textarea placeholder="Nota do casal sobre este episódio...">${st.note||''}</textarea>
+    </div>
+  `;
+ 
+  div.querySelector(`[data-check="${ep.id}"]`).addEventListener('change', e=>{
+    getEp(ep.id).watched = e.target.checked;
+    scheduleSave();
+  });
+  div.querySelector(`[data-toggle="${ep.id}"]`).addEventListener('click', e=>{
+    if(e.target.closest('input[type=checkbox]')) return;
+    document.getElementById('detail-'+ep.id).classList.toggle('open');
+  });
+  div.querySelectorAll('[data-star]').forEach(star=>{
+    star.addEventListener('click', ()=>{
+      const n = parseInt(star.dataset.star,10);
+      st.rating = st.rating===n ? 0 : n;
+      scheduleSave();
+      div.querySelectorAll('[data-star]').forEach(s2=> s2.classList.toggle('on', parseInt(s2.dataset.star,10)<=st.rating) );
+    });
+  });
+  div.querySelector('[data-date]').addEventListener('change', e=>{ st.date=e.target.value; scheduleSave(); });
+  div.querySelector('textarea').addEventListener('input', e=>{ st.note=e.target.value; scheduleSave(); });
+ 
+  return div;
+}
+ 
+/* =========================================================
+   MOVIES
+   ========================================================= */
+function renderMovies(){
+  const el = document.getElementById('moviesList');
+  el.innerHTML='';
+  MOVIES.forEach(m=>{
+    const st = getMovie(m.id);
+    const pillClass = m.canon===true?'pill-canon':m.canon==='semi'?'pill-semi':'pill-filler';
+    const pillTxt = m.canon===true?'🔵 Canônico':m.canon==='semi'?'🟡 Semi-cânone':'⚪ Não-canônico';
+    const div = document.createElement('div');
+    div.className='movie-item';
+    div.innerHTML = `
+      <input type="checkbox" data-movie="${m.id}" ${st.watched?'checked':''}>
+      <div>
+        <div class="t">⭐ ${m.name} ${m.cry?'😢':''}</div>
+        <div class="m"><span class="pill ${pillClass}">${pillTxt}</span><span>${m.year}</span><span>· ${m.when}</span></div>
+      </div>
+    `;
+    el.appendChild(div);
+    div.querySelector('input').addEventListener('change', e=>{ getMovie(m.id).watched=e.target.checked; scheduleSave(); renderAll(); });
+  });
+}
+ 
+/* =========================================================
+   HOME / OVERVIEW
+   ========================================================= */
+function totalStats(arcs){
+  let watched=0,total=0;
+  arcs.forEach(a=>a.episodes.forEach(ep=>{ total++; if(getEp(ep.id).watched) watched++; }));
+  return {watched,total};
+}
+function findContinue(){
+  for(const arc of CLASSIC_ARCS){ for(const ep of arc.episodes){ if(!getEp(ep.id).watched) return {saga:'classic', arc, ep}; } }
+  for(const arc of SHIP_ARCS){ for(const ep of arc.episodes){ if(!getEp(ep.id).watched) return {saga:'ship', arc, ep}; } }
+  return null;
+}
+function renderHome(){
+  const c = totalStats(CLASSIC_ARCS);
+  const s = totalStats(SHIP_ARCS);
+  const mw = MOVIES.filter(m=>getMovie(m.id).watched).length;
+  const mt = MOVIES.length;
+  const totalW = c.watched+s.watched+mw, totalT = c.total+s.total+mt;
+  const pct = totalT? Math.round(totalW/totalT*100) : 0;
+ 
+  document.getElementById('homePct').textContent = pct+'%';
+  document.getElementById('homeRing').style.width = pct+'%';
+  document.getElementById('streakNum').textContent = totalW;
+ 
+  document.getElementById('classicMini').textContent = `${c.watched} / ${c.total}`;
+  document.getElementById('classicMiniBar').style.width = (c.total?Math.round(c.watched/c.total*100):0)+'%';
+  document.getElementById('shipMini').textContent = `${s.watched} / ${s.total}`;
+  document.getElementById('shipMiniBar').style.width = (s.total?Math.round(s.watched/s.total*100):0)+'%';
+  document.getElementById('movieMini').textContent = `${mw} / ${mt} assistidos`;
+ 
+  const cont = findContinue();
+  const card = document.getElementById('continueCard');
+  if(cont){
+    card.style.display='flex';
+    document.getElementById('continueBadge').textContent = cont.arc.emoji;
+    document.getElementById('continueName').textContent = `#${cont.ep.num} · ${cont.ep.beat}`;
+  } else {
+    card.style.display='none';
+  }
+}
+ 
+/* =========================================================
+   EXTRAS: marathon + essential list
+   ========================================================= */
+let marathonMode='weeks', marathonScope='all';
+document.getElementById('marathonModeSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  marathonMode=b.dataset.m;
+  document.querySelectorAll('#marathonModeSeg button').forEach(x=>x.classList.toggle('active', x===b));
+  document.getElementById('marathonValueLabel').textContent = marathonMode==='weeks'?'Semanas desejadas':'Episódios por dia';
+  renderMarathon();
+});
+document.getElementById('marathonScopeSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  marathonScope=b.dataset.s;
+  document.querySelectorAll('#marathonScopeSeg button').forEach(x=>x.classList.toggle('active', x===b));
+  renderMarathon();
+});
+document.getElementById('marathonValue').addEventListener('input', renderMarathon);
+ 
+function remainingCounts(){
+  let all=0, essential=0;
+  [...CLASSIC_ARCS,...SHIP_ARCS].forEach(a=>a.episodes.forEach(ep=>{
+    if(getEp(ep.id).watched) return;
+    all++; if(ep.type!=='filler') essential++;
+  }));
+  MOVIES.forEach(m=>{ if(!getMovie(m.id).watched){ all++; if(m.canon!==false) essential++; } });
+  return {all, essential};
+}
+function renderMarathon(){
+  const value = parseFloat(document.getElementById('marathonValue').value)||1;
+  const {all, essential} = remainingCounts();
+  const remaining = marathonScope==='essential'?essential:all;
+  const box = document.getElementById('marathonResult');
+  if(marathonMode==='weeks'){
+    const perDay = remaining/(value*7);
+    const d = new Date(); d.setDate(d.getDate()+Math.round(value*7));
+    box.innerHTML = `<div class="big">${perDay.toFixed(1)} ep/dia</div><div class="small">Faltam <strong>${remaining}</strong> episódios/filmes. Em <strong>${value} semana${value==1?'':'s'}</strong> vocês terminam perto de <strong>${d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'})}</strong>.</div>`;
+  } else {
+    const weeks = remaining/(value*7);
+    const d = new Date(); d.setDate(d.getDate()+Math.round(weeks*7));
+    box.innerHTML = `<div class="big">${weeks.toFixed(1)} semanas</div><div class="small">Assistindo <strong>${value} ep/dia</strong>, faltam <strong>${remaining}</strong> — terminam perto de <strong>${d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long'})}</strong>.</div>`;
+  }
+}
+ 
+let essentialMode='essential';
+document.getElementById('essentialSeg').addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  essentialMode=b.dataset.f;
+  document.querySelectorAll('#essentialSeg button').forEach(x=>x.classList.toggle('active', x===b));
+  renderEssentialList();
+});
+function renderEssentialList(){
+  const el = document.getElementById('essentialList');
+  const arcs = [...CLASSIC_ARCS.map(a=>({...a,saga:'Clássico'})), ...SHIP_ARCS.map(a=>({...a,saga:'Shippuden'}))];
+  const filtered = arcs.filter(a=> essentialMode==='essential' ? a.type!=='filler' : a.type==='filler');
+  el.innerHTML = filtered.map(a=>`<div class="list-mini"><span>${a.emoji} ${a.saga} — ${a.name}</span><span class="r">Ep. ${a.start}–${a.end}</span></div>`).join('');
+}
+ 
+/* =========================================================
+   RENDER ALL
+   ========================================================= */
+function renderAll(){
+  renderHome();
+  renderMovies();
+  renderMarathon();
+  renderEssentialList();
+  if(document.getElementById('view-path').classList.contains('active')) renderPath();
+}
+ 
+loadState();
+ 
+})();
+</script>
+</body>
+</html>
+ 
